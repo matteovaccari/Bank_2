@@ -15,23 +15,9 @@ public class Main {
 
         Admin guichetiere = new Admin("Guichetiere"); // Instanciation de la guichetière
 
-        Scanner sc = new Scanner(System.in);   // Instanciation du scanner
-
-        System.out.println("Admin.");
-        System.out.println("Mot de passe ?");
-
-        String inputPassword = sc.nextLine();   // Connection
-
-        if (inputPassword.equals(guichetiere.getPassWord())) {
-            System.out.println("Mot de passe corect. Accès à l'application accepté.");
 
         clientList.add(thierry.name);    // Ajout des clients à la liste de clients
         clientList.add(matthieu.name);
-
-        System.out.println("Voici la liste des clients :");  // Boucle d'affichage de la liste des clients
-        for (int i =0; i < clientList.size();i++) {
-            System.out.println(clientList.get(i));
-        }
 
         thierry.bank = bank1;  //Affectation de la banque à l'attribut des clients
         matthieu.bank = bank1;
@@ -48,39 +34,30 @@ public class Main {
         accountList.add(matthieuCurrentAccount.name);
         accountList.add(matthieuSavingAccount.name);
 
-        System.out.println("Voici la liste des comptes: ");
-        for (int i = 0; i < accountList.size(); i++) {
-            System.out.println( accountList.get(i));
+        Scanner sc = new Scanner(System.in);   // Instanciation du scanner
+
+        System.out.println("Admin.");
+        System.out.println("Mot de passe ?");
+
+        String inputPassword = sc.nextLine();   // Connection
+
+        while (!inputPassword.equals(guichetiere.getPassWord())) {  //Tant que le mot de passe tapé est différent du getPass, on retry
+            System.out.println("Mot de passe Incorrect, réassayez.");
+            inputPassword = sc.nextLine();
         }
+        System.out.println("Mot de passe correct, accés à l'application autorisé.");  //Si mot de passe entré .equals le mot de passe, accés autorisé
 
-        thierryCurrentAccount.balance = 50;   //Ajout de 50€ sur le solde du compte courant
 
-        thierry.showBalance(thierryCurrentAccount);
 
-        bank1.transfer(thierry,matthieu,25);    // Virement entre le compte de thierry et le compte de matthieu de 2500€
-
-        thierry.showBalance(thierryCurrentAccount);
-
-        thierry.deposit(80,thierryCurrentAccount);
-        matthieu.deposit(100,matthieuCurrentAccount);
-
-        thierry.showBalance(thierryCurrentAccount);
-
-        thierry.withdrawal(110,thierryCurrentAccount);
-
-       thierry.showInfo(thierryCurrentAccount);
-
-       matthieu.deposit(150,matthieuSavingAccount);
-       matthieu.withdrawal(500,matthieuSavingAccount);
-
-       thierry.showAccounts();
-       matthieu.showAccounts();
-
-        bank1.showTransferHistory();
-
-        } else {     // Si le mot de passe est incorrect rien du code ci dessus ne n'éxécute
-            System.out.println("Mot de passe inccrrect");
-        }
 
     }
 }
+/**  System.out.println("Voici la liste des clients :");  // Boucle d'affichage de la liste des clients
+ for (int i =0; i < clientList.size();i++) {
+ System.out.println(clientList.get(i));
+ }
+
+ System.out.println("Voici la liste des comptes: ");   //boucle list des comptes
+ for (int i = 0; i < accountList.size(); i++) {
+ System.out.println( accountList.get(i));
+ } */
