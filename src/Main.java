@@ -22,6 +22,8 @@ public class Main {
         thierry.bank = bank1;  //Affectation de la banque à l'attribut des clients
         matthieu.bank = bank1;
 
+        bank1.client = matthieu; // Affection de matthieu comme client // test(X)
+
         CurrentAccount thierryCurrentAccount = new CurrentAccount("Thierry");   //Creation du compte courant des clients
         CurrentAccount matthieuCurrentAccount = new CurrentAccount("Matthieu");
         SavingAccount matthieuSavingAccount = new SavingAccount("Matthieu");  // Création du compte épargne de Matthieu
