@@ -38,7 +38,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);   // Instanciation du scanner
 
-        /**
+
 
          System.out.println("Admin.");
          System.out.println("Mot de passe ?");
@@ -51,8 +51,6 @@ public class Main {
          }
          System.out.println("Mot de passe correct, accés à l'application autorisé.");  //Si mot de passe entré .equals le mot de passe, accés autorisé
 
-         */
-    thierry.deposit(50, thierryCurrentAccount);
 
         int nbInfinity = 1;
 
@@ -84,20 +82,42 @@ public class Main {
                             System.out.println("Choisir la somme à virer sur le compte de Thierry: ");
                             int amountDeposit = sc.nextInt();
                             thierry.deposit(amountDeposit, thierryCurrentAccount);
-                            System.out.println("Dépot effectué, nouveau solde : " + thierry.currentAccount.balance + "€.");
 
                         } else if (clientDeposit.equalsIgnoreCase("matthieu")) {
                             System.out.println("Choisir la somme à virer sur le compte de Matthieu: ");
                             int amountDeposit2 = sc.nextInt();
                             matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
-                            System.out.println("Dépot éffectué, nouveau solde : " + matthieu.currentAccount.balance + "€.");
                         } /** else {
                             System.out.println("Erreur de saisie nom client, réassayez.");
                         }   */
                     }
+                    break;
+
+                case 4:
+                    System.out.println("Interface des retraits, choisir client qui va retirer son argent:");
+                    for (int i = 0; i < clientList.size(); i++) {
+                        System.out.println(clientList.get(i));
+                        String clientWithdrawal = sc.nextLine();
+
+                        if (clientWithdrawal.equalsIgnoreCase("thierry")) {
+                            System.out.println("Choisir la somme à retirer sur le compte de Thierry: ");
+                            int amountWithDrawal = sc.nextInt();
+                            thierry.withdrawal(amountWithDrawal, thierryCurrentAccount);
+
+                        } else if (clientWithdrawal.equalsIgnoreCase("matthieu")) {
+                            System.out.println("Choisir la somme à retirer sur le compte de Matthieu: ");
+                            int amountWithDrawal = sc.nextInt();
+                            matthieu.withdrawal(amountWithDrawal, matthieuCurrentAccount);
+                        } /** else {
+                         System.out.println("Erreur de saisie nom client, réassayez.");
+                         }   */
+                    }
+                    break;
+
             }
-        }
             System.out.println(" "); // avant retour du menu ligne blanche
+        }
+
 
         }
 
