@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main (String ... args){
+    public static void main(String... args) {
 
         Bank bank1 = new Bank("Bank1");  //Instanciation de la banque Bank1
 
@@ -11,7 +11,7 @@ public class Main {
         List<String> accountList = new ArrayList<>(); // Liste de comptes
 
         Client thierry = new Client("Thierry"); //Instanciation de clients
-        Client matthieu = new Client ("Matthieu");
+        Client matthieu = new Client("Matthieu");
 
         Admin guichetiere = new Admin("Guichetiere"); // Instanciation de la guichetière
 
@@ -38,28 +38,69 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);   // Instanciation du scanner
 
-        System.out.println("Admin.");
-        System.out.println("Mot de passe ?");
+        /**
 
-        String inputPassword = sc.nextLine();   // Connection
+         System.out.println("Admin.");
+         System.out.println("Mot de passe ?");
 
-        while (!inputPassword.equals(guichetiere.getPassWord())) {  //Tant que le mot de passe tapé est différent du getPass, on retry
-            System.out.println("Mot de passe Incorrect, réassayez.");
-            inputPassword = sc.nextLine();
+         String inputPassword = sc.nextLine();   // Connection
+
+         while (!inputPassword.equals(guichetiere.getPassWord())) {  //Tant que le mot de passe tapé est différent du getPass, on retry
+         System.out.println("Mot de passe Incorrect, réassayez.");
+         inputPassword = sc.nextLine();
+         }
+         System.out.println("Mot de passe correct, accés à l'application autorisé.");  //Si mot de passe entré .equals le mot de passe, accés autorisé
+
+         */
+    thierry.deposit(50, thierryCurrentAccount);
+
+        int nbInfinity = 1;
+
+        while (nbInfinity ==1) {
+            bank1.showBankMenu();
+
+            int nbTodo = sc.nextInt();
+
+            switch (nbTodo) {
+                case 1:
+                    System.out.println("Voici la liste des clients:");
+                    for (int i = 0; i < clientList.size(); i++) {
+                        System.out.println(clientList.get(i));
+                    }
+                    break;
+                case 2:
+                    System.out.println("Voici la liste des comptes");
+                    for (int i = 0; i < accountList.size(); i++) {
+                        System.out.println(accountList.get(i));
+                    }
+                    break;
+                case 3:
+                    System.out.println("Interface des versements, choisir client qui va recevoir le dépôt:");
+                    for (int i = 0; i < clientList.size(); i++) {
+                        System.out.println(clientList.get(i));
+                        String clientDeposit = sc.nextLine();
+
+                        if (clientDeposit.equalsIgnoreCase("thierry")) {
+                            System.out.println("Choisir la somme à virer sur le compte de Thierry: ");
+                            int amountDeposit = sc.nextInt();
+                            thierry.deposit(amountDeposit, thierryCurrentAccount);
+                            System.out.println("Dépot effectué, nouveau solde : " + thierry.currentAccount.balance + "€.");
+
+                        } else if (clientDeposit.equalsIgnoreCase("matthieu")) {
+                            System.out.println("Choisir la somme à virer sur le compte de Matthieu: ");
+                            int amountDeposit2 = sc.nextInt();
+                            matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
+                            System.out.println("Dépot éffectué, nouveau solde : " + matthieu.currentAccount.balance + "€.");
+                        } /** else {
+                            System.out.println("Erreur de saisie nom client, réassayez.");
+                        }   */
+                    }
+            }
         }
-        System.out.println("Mot de passe correct, accés à l'application autorisé.");  //Si mot de passe entré .equals le mot de passe, accés autorisé
+            System.out.println(" "); // avant retour du menu ligne blanche
 
+        }
 
 
 
     }
-}
-/**  System.out.println("Voici la liste des clients :");  // Boucle d'affichage de la liste des clients
- for (int i =0; i < clientList.size();i++) {
- System.out.println(clientList.get(i));
- }
-
- System.out.println("Voici la liste des comptes: ");   //boucle list des comptes
- for (int i = 0; i < accountList.size(); i++) {
- System.out.println( accountList.get(i));
- } */
