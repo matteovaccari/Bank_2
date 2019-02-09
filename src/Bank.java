@@ -41,22 +41,14 @@ public class Bank {
             System.out.println(transferHistory.get(i));
         }
     }
-
     void showBankMenu() {
-        System.out.println("Bienvenu guichetière, que voulez vous faire ?:");
+        System.out.println("Que voulez vous faire ?:");
         System.out.println("1 - Voir la liste des clients");
         System.out.println("2 - Voir la liste des comptes");
         System.out.println("3 - Effectuer un versement");
         System.out.println("4 - Effectuer un retrait");
         System.out.println("5 - Effectuer un virement entre deux clients");
-        Scanner sc = new Scanner(System.in);
-        String nbTodo = sc.nextLine();
-        while (nbTodo != "1" || nbTodo != "2"|| nbTodo != "3"|| nbTodo != "4"|| nbTodo != "5") {
-            System.out.println("Erreur de saisie, entrez le numéro correspondant à une action");
-        }
-        switch (nbTodo) {
-            case "1":
-                System.out.println();
-        }
     }
+
+
 }
