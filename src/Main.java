@@ -39,22 +39,21 @@ public class Main {
         Scanner sc = new Scanner(System.in);   // Instanciation du scanner
 
 
+        System.out.println("Admin.");
+        System.out.println("Mot de passe ?");
 
-         System.out.println("Admin.");
-         System.out.println("Mot de passe ?");
+        String inputPassword = sc.nextLine();   // Connection
 
-         String inputPassword = sc.nextLine();   // Connection
-
-         while (!inputPassword.equals(guichetiere.getPassWord())) {  //Tant que le mot de passe tapé est différent du getPass, on retry
-         System.out.println("Mot de passe Incorrect, réassayez.");
-         inputPassword = sc.nextLine();
-         }
-         System.out.println("Mot de passe correct, accés à l'application autorisé.");  //Si mot de passe entré .equals le mot de passe, accés autorisé
+        while (!inputPassword.equals(guichetiere.getPassWord())) {  //Tant que le mot de passe tapé est différent du getPass, on retry
+            System.out.println("Mot de passe Incorrect, réassayez.");
+            inputPassword = sc.nextLine();
+        }
+        System.out.println("Mot de passe correct, accés à l'application autorisé.");  //Si mot de passe entré .equals le mot de passe, accés autorisé
 
 
         int nbInfinity = 1;
 
-        while (nbInfinity ==1) {
+        while (nbInfinity == 1) {
             bank1.showBankMenu();
 
             int nbTodo = sc.nextInt();
@@ -88,8 +87,8 @@ public class Main {
                             int amountDeposit2 = sc.nextInt();
                             matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
                         } /** else {
-                            System.out.println("Erreur de saisie nom client, réassayez.");
-                        }   */
+                         System.out.println("Erreur de saisie nom client, réassayez.");
+                         }   */
                     }
                     break;
 
@@ -113,14 +112,26 @@ public class Main {
                          }   */
                     }
                     break;
+                case 5:
+                    System.out.println("Interface des virements, choisir client émmetteur");
+                    for (int i = 0; i < clientList.size(); i++) {
+                        System.out.println(clientList.get(i));
+                        String client1 = sc.nextLine();
 
+                    }
+                    System.out.println("Choisir client recepteur");
+                    for (int i = 0; i < clientList.size(); i++) {
+                        System.out.println(clientList.get(i));
+                    }
+                    String client2 = sc.nextLine();
+
+
+                    System.out.println(" "); // avant retour du menu ligne blanche
             }
-            System.out.println(" "); // avant retour du menu ligne blanche
-        }
 
 
         }
-
 
 
     }
+}
