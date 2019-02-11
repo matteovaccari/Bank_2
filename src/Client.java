@@ -22,10 +22,9 @@ public class Client {
 
     //Méthodes
 
-    void showInfo(Account accountType) { // Voir ID + solde
-        if (accountType == currentAccount) {
+    void showInfo() { // Voir ID + solde
             System.out.println(this.name + ", identifiant bancaire :" + this.id + " dispose de " + this.currentAccount.balance + "€ sur son compte courant");
-        } else if (accountType == savingAccount) {
+          if (this.savingAccount != null) {
             System.out.println(this.name + ", identifiant bancaire :" + this.id + " dispose de " + this.savingAccount.balance + "€ sur son compte épargne");
         }
     }
