@@ -48,6 +48,7 @@ public class Bank {
         System.out.println("3 - Effectuer un versement");
         System.out.println("4 - Effectuer un retrait");
         System.out.println("5 - Effectuer un virement entre deux clients");
+        System.out.println("6 - Voir le solde des comptes d'un client");
     }
 
 
