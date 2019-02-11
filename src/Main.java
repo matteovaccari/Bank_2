@@ -137,11 +137,24 @@ public class Main {
                             System.out.println("Virement impossible entre deux comptes du même client, réassayez");
                         } else if (client1 == 2 && client2 == 1) {
                             bank1.transfer(thierry, matthieu, amount);
+                        } else {
+                            System.out.println("Erreur de saisie.");
                         }
                     break;
                 case 6 :
                     System.out.println("Choisir client à consulter le(s) solde(s)");
                     System.out.println("1 - Thierry");
+                    System.out.println("2 - Matthieu");
+
+                    int client = sc.nextInt();
+
+                        if (client == 1) {
+                            thierry.showBalance();
+                        } else if (client == 2) {
+                            matthieu.showBalance();
+                        }
+                    break;
+                case 7:
 
             }
             System.out.println(" "); // avant retour du menu ligne blanche
