@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String... args) {
+    public static void main(String... args) throws InterruptedException {
 
         Bank bank1 = new Bank("Bank1");  //Instanciation de la banque Bank1
 
@@ -64,12 +64,14 @@ public class Main {
                     for (int i = 0; i < clientList.size(); i++) {
                         System.out.println(clientList.get(i));
                     }
+                    Thread.sleep(3000);
                     break;
                 case 2:
                     System.out.println("Voici la liste des comptes");
                     for (int i = 0; i < accountList.size(); i++) {
                         System.out.println(accountList.get(i));
                     }
+                    Thread.sleep(3000);
                     break;
                 case 3:
                     System.out.println("Interface des versements, choisir client qui va recevoir le dépôt:");
@@ -88,6 +90,7 @@ public class Main {
                             matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
                         }
                     }
+                     Thread.sleep(3001);
                     break;
 
                 case 4:
@@ -109,6 +112,7 @@ public class Main {
                          System.out.println("Erreur de saisie nom client, réassayez.");
                          }   */
                     }
+                    Thread.sleep(3000);
                     break;
                 case 5:
 
@@ -138,6 +142,7 @@ public class Main {
                         } else {
                             System.out.println("Erreur de saisie.");
                         }
+                    Thread.sleep(3000);
                     break;
                 case 6 :
                     System.out.println("Choisir client à consulter le(s) solde(s)");
@@ -151,6 +156,7 @@ public class Main {
                         } else if (client == 2) {
                             matthieu.showBalance();
                         }
+                    Thread.sleep(3000);
                     break;
                 case 7:
                     System.out.println("Choisir client à consulter les informations :");
@@ -164,9 +170,11 @@ public class Main {
                     } else if (clientInfo == 2) {
                         matthieu.showInfo();
                     }
+                    Thread.sleep(3000);
                     break;
                 case 8:
                     bank1.showTransferHistory();
+                    Thread.sleep(3000);
                     break;
 
             }
