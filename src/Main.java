@@ -86,9 +86,7 @@ public class Main {
                             System.out.println("Choisir la somme à virer sur le compte de Matthieu: ");
                             int amountDeposit2 = sc.nextInt();
                             matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
-                        } /** else {
-                         System.out.println("Erreur de saisie nom client, réassayez.");
-                         }   */
+                        }
                     }
                     break;
 
@@ -166,6 +164,9 @@ public class Main {
                     } else if (clientInfo == 2) {
                         matthieu.showInfo();
                     }
+                    break;
+                case 8:
+                    bank1.showTransferHistory();
                     break;
 
             }
