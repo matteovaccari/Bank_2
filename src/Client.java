@@ -30,10 +30,10 @@ public class Client {
         }
     }
 
-    void showBalance(Account accountType) { // Voir solde
-        if (accountType == currentAccount) {
+    void showBalance() { // Voir solde
+
             System.out.println(this.name + " dispose de " + this.currentAccount.balance + "€ sur son compte courant.");
-        } else if (accountType == savingAccount) {
+          if (this.savingAccount != null) {
             System.out.println(this.name + " dispose de " + this.savingAccount.balance + "€ sur son compte épargne.");
         }
     }
