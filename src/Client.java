@@ -25,7 +25,7 @@ public class Client {
     void showInfo() { // Voir ID + solde
             System.out.println(this.name + ", identifiant bancaire :" + this.id + " dispose de " + this.currentAccount.balance + "€ sur son compte courant");
           if (this.savingAccount != null) {
-            System.out.println(this.name + ", identifiant bancaire :" + this.id + " dispose de " + this.savingAccount.balance + "€ sur son compte épargne");
+            System.out.println("Et également de " + this.savingAccount.balance + "€ sur son compte épargne");
         }
     }
 
