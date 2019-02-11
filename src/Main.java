@@ -155,6 +155,18 @@ public class Main {
                         }
                     break;
                 case 7:
+                    System.out.println("Choisir client à consulter les informations :");
+                    System.out.println("1 - Thierry");
+                    System.out.println("2 - Matthieu");
+
+                    int clientInfo = sc.nextInt();
+
+                    if (clientInfo == 1) {
+                        thierry.showInfo();
+                    } else if (clientInfo == 2) {
+                        matthieu.showInfo();
+                    }
+                    break;
 
             }
             System.out.println(" "); // avant retour du menu ligne blanche
