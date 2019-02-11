@@ -36,9 +36,13 @@ public class Bank {
     }
 
     void showTransferHistory () {
-        System.out.println("Voici la liste des transfers qui ont eut lieu dans " + this.name);
-        for (int i = 0; i < transferHistory.size(); i++) {
-            System.out.println(transferHistory.get(i));
+        if (transferHistory.size() != 0) {
+            System.out.println("Voici la liste des transfers qui ont eut lieu dans " + this.name);
+            for (int i = 0; i < transferHistory.size(); i++) {
+                System.out.println(transferHistory.get(i));
+            }
+        } else if (transferHistory.size() == 0) {
+            System.out.println("Aucune transaction réalisée");
         }
     }
     void showBankMenu() {
@@ -50,6 +54,7 @@ public class Bank {
         System.out.println("5 - Effectuer un virement entre deux clients");
         System.out.println("6 - Voir le solde des comptes d'un client");
         System.out.println("7 - Voir les informations d'un client");
+        System.out.println("8 - Voir l'historique des transactions");
     }
 
 
