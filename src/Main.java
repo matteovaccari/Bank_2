@@ -90,7 +90,7 @@ public class Main {
                             matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
                         }
                     }
-                    Thread.sleep(3000);
+                     Thread.sleep(3001);
                     break;
 
                 case 4:
