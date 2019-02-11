@@ -38,7 +38,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);   // Instanciation du scanner
 
-
+/**
         System.out.println("Admin.");
         System.out.println("Mot de passe ?");
 
@@ -49,7 +49,7 @@ public class Main {
             inputPassword = sc.nextLine();
         }
         System.out.println("Mot de passe correct, accés à l'application autorisé.");  //Si mot de passe entré .equals le mot de passe, accés autorisé
-
+            */
 
         int nbInfinity = 1;
 
@@ -113,21 +113,38 @@ public class Main {
                     }
                     break;
                 case 5:
+
                     System.out.println("Interface des virements, choisir client émmetteur");
-                    for (int i = 0; i < clientList.size(); i++) {
-                        System.out.println(clientList.get(i));
-                        String client1 = sc.nextLine();
 
-                    }
+                    System.out.println("1 - Matthieu");
+                    System.out.println("2 - Thierry");
+                    int client1 = sc.nextInt();
+
                     System.out.println("Choisir client recepteur");
-                    for (int i = 0; i < clientList.size(); i++) {
-                        System.out.println(clientList.get(i));
-                    }
-                    String client2 = sc.nextLine();
 
+                    System.out.println("1 - Matthieu");
+                    System.out.println("2 - Thierry");
+                    int client2 = sc.nextInt();
 
-                    System.out.println(" "); // avant retour du menu ligne blanche
+                    System.out.println("Choisir montant du transfer");
+                    int amount = sc.nextInt();
+
+                        if (client1 == 1 && client2 == 1) {
+                            System.out.println("Virement impossible entre deux comptes du même client, réassayez");
+                        } else if (client1 == 1 && client2 == 2) {
+                            bank1.transfer(matthieu,thierry,amount);
+                        } else if (client1 == 2 && client2 == 2) {
+                            System.out.println("Virement impossible entre deux comptes du même client, réassayez");
+                        } else if (client1 == 2 && client2 == 1) {
+                            bank1.transfer(thierry, matthieu, amount);
+                        }
+                    break;
+                case 6 :
+                    System.out.println("Choisir client à consulter le(s) solde(s)");
+                    System.out.println("1 - Thierry");
+
             }
+            System.out.println(" "); // avant retour du menu ligne blanche
 
 
         }
