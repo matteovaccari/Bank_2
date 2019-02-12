@@ -1,10 +1,13 @@
-package Bank;
+package com.vaccari.matteo.account;
 
-import Bank.account.Bank;
-import Bank.account.CurrentAccount;
-import Bank.account.SavingAccount;
-import Bank.clients.Admin;
-import Bank.clients.Client;
+import com.vaccari.matteo.account.accounts.CurrentAccount;
+import com.vaccari.matteo.account.accounts.SavingAccount;
+import com.vaccari.matteo.account.clients.Admin;
+import com.vaccari.matteo.account.clients.Client;
+import com.vaccari.matteo.account.exceptions.InsufisiantBalanceForBankTransferException;
+import com.vaccari.matteo.account.exceptions.InsufisiantBalanceForWithdrawalException;
+import com.vaccari.matteo.account.exceptions.NegativeAmountForDepositException;
+import com.vaccari.matteo.account.exceptions.NegativeAmountForTransfertException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +47,7 @@ public class Main {
         accountList.add(matthieuSavingAccount.name);
 
         Scanner sc = new Scanner(System.in);   // Instanciation du scanner
+
 
 /**
         System.out.println("Admin.");
@@ -89,12 +93,17 @@ public class Main {
                         if (clientDeposit.equalsIgnoreCase("thierry")) {
                             System.out.println("Choisir la somme à virer sur le compte de Thierry: ");
                             int amountDeposit = sc.nextInt();
-                            thierry.deposit(amountDeposit, thierryCurrentAccount);
-
+                                try {
+                                    thierry.deposit(amountDeposit, thierryCurrentAccount);
+                                } catch (NegativeAmountForDepositException e) {
+                                }
                         } else if (clientDeposit.equalsIgnoreCase("matthieu")) {
                             System.out.println("Choisir la somme à virer sur le compte de Matthieu: ");
                             int amountDeposit2 = sc.nextInt();
-                            matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
+                                try {
+                                    matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
+                                } catch (NegativeAmountForDepositException e) {
+                                }
                         }
                     }
                      Thread.sleep(3001);
@@ -109,20 +118,28 @@ public class Main {
                         if (clientWithdrawal.equalsIgnoreCase("thierry")) {
                             System.out.println("Choisir la somme à retirer sur le compte de Thierry: ");
                             int amountWithDrawal = sc.nextInt();
-                            thierry.withdrawal(amountWithDrawal, thierryCurrentAccount);
+                            try {                                                                                   //Catch de l'esception pour solde insu pour retrait
+                                thierry.withdrawal(amountWithDrawal, thierryCurrentAccount);
+                            }
+                            catch (InsufisiantBalanceForWithdrawalException e) {
+
+                            }
 
                         } else if (clientWithdrawal.equalsIgnoreCase("matthieu")) {
                             System.out.println("Choisir la somme à retirer sur le compte de Matthieu: ");
                             int amountWithDrawal = sc.nextInt();
-                            matthieu.withdrawal(amountWithDrawal, matthieuCurrentAccount);
-                        } /** else {
-                         System.out.println("Erreur de saisie nom client, réassayez.");
-                         }   */
+                            try {                                                                                   //Catch de l'esception pour solde insu pour retrait
+                                matthieu.withdrawal(amountWithDrawal, matthieuCurrentAccount);
+                            }
+                            catch (InsufisiantBalanceForWithdrawalException e){
+
+                            }
+
+                        }
                     }
                     Thread.sleep(3000);
                     break;
                 case 5:
-
                     System.out.println("Interface des virements, choisir client émmetteur");
 
                     System.out.println("1 - Matthieu");
@@ -138,15 +155,32 @@ public class Main {
                     System.out.println("Choisir montant du transfer");
                     int amount = sc.nextInt();
 
+
                         if (client1 == 1 && client2 == 1) {
-                            System.out.println("Virement impossible entre deux comptes du même client, réassayez");
-                        } else if (client1 == 1 && client2 == 2) {
-                            bank1.transfer(matthieu,thierry,amount);
-                        } else if (client1 == 2 && client2 == 2) {
+                            System.out.println("Virement impossible entre deux comptes du même client, réassayez");   // Exception à créer
+                        }
+
+                        else if (client1 == 1 && client2 == 2) {
+
+                            try {                                                                                                   // Catch des 2 exceptions solde insu ou montant négatif
+                                bank1.transfer(matthieu, thierry, amount);
+                            }
+                                 catch (NegativeAmountForTransfertException | InsufisiantBalanceForBankTransferException e) {
+                                  }
+                            }
+
+
+                        else if (client1 == 2 && client2 == 2) {
                             System.out.println("Virement impossible entre deux comptes du même client, réassayez");
                         } else if (client1 == 2 && client2 == 1) {
-                            bank1.transfer(thierry, matthieu, amount);
-                        } else {
+                            try {                                                                                        // Catch des 2 exceptions solde insu ou montant négatif
+                                bank1.transfer(thierry,matthieu,amount);
+                            }
+                            catch (NegativeAmountForTransfertException | InsufisiantBalanceForBankTransferException e) {
+
+                            }
+                        }
+                        else {
                             System.out.println("Erreur de saisie.");
                         }
                     Thread.sleep(3000);
@@ -184,14 +218,15 @@ public class Main {
                     Thread.sleep(3000);
                     break;
                 case 9:
+                    System.out.println(bank1.createClient("Charles"));
 
+
+                    for (int i = 0; i < clientList.size();i++){
+                        System.out.println(clientList.get(i));
+                    }
 
             }
             System.out.println(" "); // avant retour du menu ligne blanche
-
-
         }
-
-
     }
 }

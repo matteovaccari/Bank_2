@@ -1,4 +1,4 @@
-package Bank.account;
+package com.vaccari.matteo.account.accounts;
 
 public class SavingAccount extends Account {
 

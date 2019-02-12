@@ -1,6 +1,8 @@
-package Bank.account;
+package com.vaccari.matteo.account;
 
-import Bank.clients.Client;
+import com.vaccari.matteo.account.clients.Client;
+import com.vaccari.matteo.account.exceptions.InsufisiantBalanceForBankTransferException;
+import com.vaccari.matteo.account.exceptions.NegativeAmountForTransfertException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,22 +22,25 @@ public class Bank {
 
     // Méthodes
 
-   public void transfer (Client client1, Client client2, int amount) {
+   public void transfer (Client client1, Client client2, int amount) throws InsufisiantBalanceForBankTransferException, NegativeAmountForTransfertException {
+
+                if (client1.currentAccount.balance < amount) {
+                    throw new InsufisiantBalanceForBankTransferException();   // Créer une exception si le solde du client émétteur est insufissant
+                }
+
+                if(amount < 0) {
+                    throw new NegativeAmountForTransfertException(); // Throw une exception si le montant est négatif
+                }
+
         if (client1.currentAccount.balance >= amount) {
             client1.currentAccount.balance -= amount;
             client2.currentAccount.balance += amount;
             System.out.println(amount + "€ on étés transférés du compte de " + client1.name + " au compte de " + client2.name + ".");
             transferHistory.add("Virement entre " + client1.name + " et " + client2.name + " de : " + amount + "€.");
-        } else if (client1.currentAccount.balance < amount) {
-            System.out.println("Le transfert de " + amount + "€ entre les comptes de "+ client1.name + " et " + client2.name +
-                    " est impossible, pour cause de solde insufisant.");
-        } else {
+        }  else {
             System.out.println("Erreur de saisie, compte client inéxistant ou montant incorrect");
         }
-
-         // Il n'est pas possible de virer de l'argent vers/depuis un compte épargne d'un autre client, seul ce dernier le peut.
-
-
+        // Il n'est pas possible de virer de l'argent vers/depuis un compte épargne d'un autre client, seul ce dernier le peut.
     }
 
    public void showTransferHistory () {
@@ -58,6 +63,10 @@ public class Bank {
         System.out.println("6 - Voir le solde des comptes d'un client");
         System.out.println("7 - Voir les informations d'un client");
         System.out.println("8 - Voir l'historique des transactions");
+    }
+
+    public Client createClient(String name) {
+       return new Client (name);
     }
 
 }

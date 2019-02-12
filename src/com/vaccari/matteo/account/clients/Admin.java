@@ -1,4 +1,4 @@
-package Bank.clients;
+package com.vaccari.matteo.account.clients;
 
 public class Admin extends Client {
 
