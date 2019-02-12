@@ -103,6 +103,10 @@ public class Client {
             System.out.println(historyList.get(i));
         }
     }
+
+   public void createClient(String name) {
+       Client name = new Client();
+   }
 }
 
 

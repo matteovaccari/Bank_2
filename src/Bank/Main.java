@@ -183,6 +183,8 @@ public class Main {
                     bank1.showTransferHistory();
                     Thread.sleep(3000);
                     break;
+                case 9:
+
 
             }
             System.out.println(" "); // avant retour du menu ligne blanche
