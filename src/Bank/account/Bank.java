@@ -60,5 +60,4 @@ public class Bank {
         System.out.println("8 - Voir l'historique des transactions");
     }
 
-
 }
