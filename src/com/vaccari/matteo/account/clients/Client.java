@@ -6,6 +6,7 @@ import com.vaccari.matteo.account.accounts.CurrentAccount;
 import com.vaccari.matteo.account.accounts.SavingAccount;
 import com.vaccari.matteo.account.exceptions.InsufisiantBalanceForWithdrawalException;
 import com.vaccari.matteo.account.exceptions.NegativeAmountForDepositException;
+import com.vaccari.matteo.account.exceptions.NegativeAmountForWithdrawalException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,12 +64,12 @@ public class Client {
         }
     }
 
-    public void withdrawal(int howMuch, Account whichAccount) throws InsufisiantBalanceForWithdrawalException, NullPointerException {
+    public void withdrawal(int howMuch, Account whichAccount) throws InsufisiantBalanceForWithdrawalException, NegativeAmountForWithdrawalException {
 
         if (howMuch < 0) {
-            throw new InsufisiantBalanceForWithdrawalException();
+            throw new NegativeAmountForWithdrawalException();
         }
-        if (howMuch < 0) {
+        if (this.currentAccount.balance < howMuch) {
             throw new InsufisiantBalanceForWithdrawalException();
         }
 
