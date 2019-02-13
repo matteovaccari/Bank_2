@@ -4,10 +4,7 @@ import com.vaccari.matteo.account.accounts.CurrentAccount;
 import com.vaccari.matteo.account.accounts.SavingAccount;
 import com.vaccari.matteo.account.clients.Admin;
 import com.vaccari.matteo.account.clients.Client;
-import com.vaccari.matteo.account.exceptions.InsufisiantBalanceForBankTransferException;
-import com.vaccari.matteo.account.exceptions.InsufisiantBalanceForWithdrawalException;
-import com.vaccari.matteo.account.exceptions.NegativeAmountForDepositException;
-import com.vaccari.matteo.account.exceptions.NegativeAmountForTransfertException;
+import com.vaccari.matteo.account.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,7 +118,7 @@ public class Main {
                             try {                                                                                   //Catch de l'esception pour solde insu pour retrait
                                 thierry.withdrawal(amountWithDrawal, thierryCurrentAccount);
                             }
-                            catch (InsufisiantBalanceForWithdrawalException e) {
+                            catch (InsufisiantBalanceForWithdrawalException | NegativeAmountForWithdrawalException e) {
 
                             }
 
@@ -131,7 +128,7 @@ public class Main {
                             try {                                                                                   //Catch de l'esception pour solde insu pour retrait
                                 matthieu.withdrawal(amountWithDrawal, matthieuCurrentAccount);
                             }
-                            catch (InsufisiantBalanceForWithdrawalException e){
+                            catch (InsufisiantBalanceForWithdrawalException | NegativeAmountForWithdrawalException e){
 
                             }
 
