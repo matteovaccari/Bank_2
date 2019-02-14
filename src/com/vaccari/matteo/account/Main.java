@@ -47,17 +47,15 @@ public class Main {
 
 
 /**
-        System.out.println("Admin.");
-        System.out.println("Mot de passe ?");
-
-        String inputPassword = sc.nextLine();   // Connection
-
-        while (!inputPassword.equals(guichetiere.getPassWord())) {  //Tant que le mot de passe tapé est différent du getPass, on retry
-            System.out.println("Mot de passe Incorrect, réassayez.");
-            inputPassword = sc.nextLine();
-        }
-        System.out.println("Mot de passe correct, accés à l'application autorisé.");  //Si mot de passe entré .equals le mot de passe, accés autorisé
-            */
+ System.out.println("Admin.");
+ System.out.println("Mot de passe ?");
+ String inputPassword = sc.nextLine();   // Connection
+ while (!inputPassword.equals(guichetiere.getPassWord())) {  //Tant que le mot de passe tapé est différent du getPass, on retry
+ System.out.println("Mot de passe Incorrect, réassayez.");
+ inputPassword = sc.nextLine();
+ }
+ System.out.println("Mot de passe correct, accés à l'application autorisé.");  //Si mot de passe entré .equals le mot de passe, accés autorisé
+ */
 
         int nbInfinity = 1;
 
@@ -72,14 +70,14 @@ public class Main {
                     for (int i = 0; i < clientList.size(); i++) {
                         System.out.println(clientList.get(i));
                     }
-                    Thread.sleep(3000);
+                    Thread.sleep(4500);
                     break;
                 case 2:
                     System.out.println("Voici la liste des comptes");
                     for (int i = 0; i < accountList.size(); i++) {
                         System.out.println(accountList.get(i));
                     }
-                    Thread.sleep(3000);
+                    Thread.sleep(4500);
                     break;
                 case 3:
                     System.out.println("Interface des versements, choisir client qui va recevoir le dépôt:");
@@ -90,20 +88,20 @@ public class Main {
                         if (clientDeposit.equalsIgnoreCase("thierry")) {
                             System.out.println("Choisir la somme à virer sur le compte de Thierry: ");
                             int amountDeposit = sc.nextInt();
-                                try {
-                                    thierry.deposit(amountDeposit, thierryCurrentAccount);
-                                } catch (NegativeAmountForDepositException e) {
-                                }
+                            try {
+                                thierry.deposit(amountDeposit, thierryCurrentAccount);
+                            } catch (NegativeAmountForDepositException e) {
+                            }
                         } else if (clientDeposit.equalsIgnoreCase("matthieu")) {
                             System.out.println("Choisir la somme à virer sur le compte de Matthieu: ");
                             int amountDeposit2 = sc.nextInt();
-                                try {
-                                    matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
-                                } catch (NegativeAmountForDepositException e) {
-                                }
+                            try {
+                                matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
+                            } catch (NegativeAmountForDepositException e) {
+                            }
                         }
                     }
-                     Thread.sleep(3001);
+                    Thread.sleep(4500);
                     break;
 
                 case 4:
@@ -134,7 +132,7 @@ public class Main {
 
                         }
                     }
-                    Thread.sleep(3000);
+                    Thread.sleep(4500);
                     break;
                 case 5:
                     System.out.println("Interface des virements, choisir client émmetteur");
@@ -153,34 +151,34 @@ public class Main {
                     int amount = sc.nextInt();
 
 
-                        if (client1 == 1 && client2 == 1) {
-                            System.out.println("Virement impossible entre deux comptes du même client, réassayez");   // Exception à créer
+                    if (client1 == 1 && client2 == 1) {
+                        System.out.println("Virement impossible entre deux comptes du même client, réassayez");   // Exception à créer
+                    }
+
+                    else if (client1 == 1 && client2 == 2) {
+
+                        try {                                                                                                   // Catch des 2 exceptions solde insu ou montant négatif
+                            bank1.transfer(matthieu, thierry, amount);
                         }
-
-                        else if (client1 == 1 && client2 == 2) {
-
-                            try {                                                                                                   // Catch des 2 exceptions solde insu ou montant négatif
-                                bank1.transfer(matthieu, thierry, amount);
-                            }
-                                 catch (NegativeAmountForTransfertException | InsufisiantBalanceForBankTransferException e) {
-                                  }
-                            }
-
-
-                        else if (client1 == 2 && client2 == 2) {
-                            System.out.println("Virement impossible entre deux comptes du même client, réassayez");
-                        } else if (client1 == 2 && client2 == 1) {
-                            try {                                                                                        // Catch des 2 exceptions solde insu ou montant négatif
-                                bank1.transfer(thierry,matthieu,amount);
-                            }
-                            catch (NegativeAmountForTransfertException | InsufisiantBalanceForBankTransferException e) {
-
-                            }
+                        catch (NegativeAmountForTransfertException | InsufisiantBalanceForBankTransferException e) {
                         }
-                        else {
-                            System.out.println("Erreur de saisie.");
+                    }
+
+
+                    else if (client1 == 2 && client2 == 2) {
+                        System.out.println("Virement impossible entre deux comptes du même client, réassayez");
+                    } else if (client1 == 2 && client2 == 1) {
+                        try {                                                                                        // Catch des 2 exceptions solde insu ou montant négatif
+                            bank1.transfer(thierry,matthieu,amount);
                         }
-                    Thread.sleep(3000);
+                        catch (NegativeAmountForTransfertException | InsufisiantBalanceForBankTransferException e) {
+
+                        }
+                    }
+                    else {
+                        System.out.println("Erreur de saisie.");
+                    }
+                    Thread.sleep(4500);
                     break;
                 case 6 :
                     System.out.println("Choisir client à consulter le(s) solde(s)");
@@ -189,12 +187,12 @@ public class Main {
 
                     int client = sc.nextInt();
 
-                        if (client == 1) {
-                            thierry.showBalance();
-                        } else if (client == 2) {
-                            matthieu.showBalance();
-                        }
-                    Thread.sleep(3000);
+                    if (client == 1) {
+                        thierry.showBalance();
+                    } else if (client == 2) {
+                        matthieu.showBalance();
+                    }
+                    Thread.sleep(4500);
                     break;
                 case 7:
                     System.out.println("Choisir client à consulter les informations :");
@@ -208,14 +206,14 @@ public class Main {
                     } else if (clientInfo == 2) {
                         matthieu.showInfo();
                     }
-                    Thread.sleep(3000);
+                    Thread.sleep(4500);
                     break;
                 case 8:
                     bank1.showTransferHistory();
-                    Thread.sleep(3000);
+                    Thread.sleep(4500);
                     break;
                 case 9:
-                    System.out.println(bank1.createClient("Charles"));
+                    //System.out.println(bank1.createClient("Charles"));
 
 
                     for (int i = 0; i < clientList.size();i++){
