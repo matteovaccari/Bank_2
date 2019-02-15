@@ -161,6 +161,8 @@ public class Main {
                             bank1.transfer(matthieu, thierry, amount);
                         }
                         catch (NegativeAmountForTransfertException | InsufisiantBalanceForBankTransferException e) {
+                            e.printStackTrace();
+                            System.out.println(e.getMessage());
                         }
                     }
 
