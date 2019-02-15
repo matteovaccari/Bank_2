@@ -9,7 +9,9 @@ import com.vaccari.matteo.account.exceptions.NegativeAmountForDepositException;
 import com.vaccari.matteo.account.exceptions.NegativeAmountForWithdrawalException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Client {
 
@@ -22,12 +24,17 @@ public class Client {
     public int id;
     public static int totalID = 0;
     public List<String> historyList = new ArrayList<>();
+    public static Map<Integer, String> clientList = new HashMap<>();
 
     // Constructeur
 
+    public Client () {
+
+    }
     public Client(String name) {
         this.name = name;
         this.id = ++totalID;
+        clientList.put(this.id, this.name);
     }
 
     //Méthodes
@@ -47,21 +54,15 @@ public class Client {
         }
     }
 
-    public void deposit(int howMuch, Account whichAccount) throws NegativeAmountForDepositException {
+    public void deposit(int howMuch) throws NegativeAmountForDepositException {
 
         if (howMuch <= 0) {
             throw new NegativeAmountForDepositException("Negative amount not allowed for deposits");
         }
-
-        if (whichAccount == currentAccount) {
-            this.currentAccount.balance += howMuch;
+        this.currentAccount.balance += howMuch;
             System.out.println(this.name + " vient de déposer " + howMuch + "€ sur son compte courant.");
             historyList.add("Dépot de " + howMuch + "€ sur le compte courant, nouveau solde : " + this.currentAccount.balance + "€.");
-        } else if (whichAccount == savingAccount) {
-            this.savingAccount.balance += howMuch;
-            System.out.println(this.name + " vient de déposer " + howMuch + "€ sur son compte épargne.");
-            historyList.add("Dépot de " + howMuch + "€ sur le compte épargne, nouveau solde : " + this.savingAccount.balance + "€.");
-        }
+
     }
 
     public void withdrawal(int howMuch, Account whichAccount) throws InsufisiantBalanceForWithdrawalException, NegativeAmountForWithdrawalException {
