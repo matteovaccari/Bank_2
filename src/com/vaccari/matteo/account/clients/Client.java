@@ -50,7 +50,7 @@ public class Client {
     public void deposit(int howMuch, Account whichAccount) throws NegativeAmountForDepositException {
 
         if (howMuch <= 0) {
-            throw new NegativeAmountForDepositException();
+            throw new NegativeAmountForDepositException("Negative amount not allowed for deposits");
         }
 
         if (whichAccount == currentAccount) {
@@ -67,10 +67,10 @@ public class Client {
     public void withdrawal(int howMuch, Account whichAccount) throws InsufisiantBalanceForWithdrawalException, NegativeAmountForWithdrawalException {
 
         if (howMuch < 0) {
-            throw new NegativeAmountForWithdrawalException();
+            throw new NegativeAmountForWithdrawalException("Negative amount not allowed for withdrawals");
         }
         if (this.currentAccount.balance < howMuch) {
-            throw new InsufisiantBalanceForWithdrawalException();
+            throw new InsufisiantBalanceForWithdrawalException("Insufisiant balance not allowed for withdrawals");
         }
 
         if (whichAccount == currentAccount) {
