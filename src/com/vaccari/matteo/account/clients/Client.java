@@ -23,8 +23,8 @@ public class Client {
     public Bank bank;
     public int id;
     public static int totalID = 0;
-    public List<String> historyList = new ArrayList<>();
-    public static Map<Integer, String> clientList = new HashMap<>();
+
+
 
     // Constructeur
 
@@ -34,7 +34,7 @@ public class Client {
     public Client(String name) {
         this.name = name;
         this.id = ++totalID;
-        clientList.put(this.id, this.name);
+        Bank.clientList.put(this.id , this);
     }
 
     //Méthodes
@@ -54,18 +54,17 @@ public class Client {
         }
     }
 
-    public void deposit(int howMuch) throws NegativeAmountForDepositException {
+    public void deposit(int howMuch, Client client) throws NegativeAmountForDepositException {
 
         if (howMuch <= 0) {
             throw new NegativeAmountForDepositException("Negative amount not allowed for deposits");
         }
-        this.currentAccount.balance += howMuch;
-            System.out.println(this.name + " vient de déposer " + howMuch + "€ sur son compte courant.");
-            historyList.add("Dépot de " + howMuch + "€ sur le compte courant, nouveau solde : " + this.currentAccount.balance + "€.");
-
+        currentAccount.balance += howMuch;
+           System.out.println(this.name + " vient de déposer " + howMuch + "€ sur son compte courant.");
+           Bank.addDepositToHistoryList(howMuch, client);
     }
 
-    public void withdrawal(int howMuch, Account whichAccount) throws InsufisiantBalanceForWithdrawalException, NegativeAmountForWithdrawalException {
+    public void withdrawal(int howMuch, Client client) throws InsufisiantBalanceForWithdrawalException, NegativeAmountForWithdrawalException {
 
         if (howMuch < 0) {
             throw new NegativeAmountForWithdrawalException("Negative amount not allowed for withdrawals");
@@ -74,21 +73,14 @@ public class Client {
             throw new InsufisiantBalanceForWithdrawalException("Insufisiant balance not allowed for withdrawals");
         }
 
-        if (whichAccount == currentAccount) {
                 this.currentAccount.balance -= howMuch;
                 System.out.println(this.name + " a retiré " + howMuch + "€ sur son compte courant, son nouveau solde est de "
                         + this.currentAccount.balance + "€.");
-                historyList.add("Retrait de " + howMuch + "€ sur le compte courant, nouveau solde : " + this.currentAccount.balance + "€.");
-        }
-        else if (whichAccount == savingAccount) {
-                this.savingAccount.balance -= howMuch;
-                System.out.println(this.name + " a retiré " + howMuch + "€ sur son compte épargne, son nouveau solde est de "
-                        + this.savingAccount.balance + "€.");
-                historyList.add("Retrait de " + howMuch + "€ sur le compte épargne, nouveau solde: " + this.savingAccount.balance + "€.");
+               Bank.addWithDrawalToHistoryList(howMuch, client);
 
             }
 
-        }
+
 
    public void showAccounts () {
         System.out.println("Liste des comptes de " + this.name + " :");
@@ -103,17 +95,6 @@ public class Client {
             System.out.println("Aucun compte épargne enregistré");
         }
     }
-
-   public void showHistory() {
-        System.out.println("Voici l'historique du compte de " + this.name + " :");
-        for (int i = 0; i < historyList.size(); i++) {
-            System.out.println(historyList.get(i));
-        }
-    }
-
-
-
-
    }
 
 
