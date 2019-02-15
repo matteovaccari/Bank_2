@@ -4,4 +4,7 @@ public class NegativeAmountForDepositException extends Exception {
     public NegativeAmountForDepositException() {
         System.out.println("Montant du dépôt entré négatif, erreur");
     }
+    public NegativeAmountForDepositException(String message) {
+        super(message);
+    }
 }

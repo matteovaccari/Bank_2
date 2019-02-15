@@ -5,4 +5,8 @@ public class NegativeAmountForWithdrawalException extends Exception {
     public NegativeAmountForWithdrawalException () {
         System.out.println("Montant entré négatif, erreur");
     }
+
+    public NegativeAmountForWithdrawalException(String message) {
+        super(message);
+    }
 }

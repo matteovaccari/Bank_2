@@ -5,4 +5,7 @@ public class InsufisiantBalanceForWithdrawalException extends Exception {
     public InsufisiantBalanceForWithdrawalException() {
         System.out.println("Solde insufisant pour retrait, erreur.");
     }
+    public InsufisiantBalanceForWithdrawalException (String message) {
+        super(message);
+    }
 }
