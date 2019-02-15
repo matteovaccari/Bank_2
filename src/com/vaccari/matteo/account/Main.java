@@ -220,8 +220,26 @@ public class Main {
                     Thread.sleep(4500);
                     break;
                 case 10:
-                    
+                    System.out.println("Interface de création de clients");
+                    System.out.println("1 - Créer un client");
+                    System.out.println("2 - Retour");
 
+                    int nb = sc.nextInt();
+
+                      switch(nb) {
+                          case 1:
+                              System.out.println("Entrez le nom du client:");
+                              sc.nextLine();
+                              String clientName = sc.nextLine();
+                              new Client (clientName);
+                              System.out.println("Client crée.");
+
+                              Thread.sleep(4000);
+                              break;
+                          case 2:
+                              Thread.sleep(150);
+                      }
+                    break;
             }
         }
         System.out.println(" "); // avant retour du menu ligne blanche
