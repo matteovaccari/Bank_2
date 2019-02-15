@@ -25,7 +25,7 @@ public class Bank {
    public void transfer (Client client1, Client client2, int amount) throws InsufisiantBalanceForBankTransferException, NegativeAmountForTransfertException {
 
                 if (client1.currentAccount.balance < amount) {
-                    throw new InsufisiantBalanceForBankTransferException();   // Créer une exception si le solde du client émétteur est insufissant
+                    throw new InsufisiantBalanceForBankTransferException("insufisiant balance not allowed for this amount.");   // Créer une exception si le solde du client émétteur est insufissant
                 }
 
                 if(amount < 0) {
@@ -63,10 +63,11 @@ public class Bank {
         System.out.println("6 - Voir le solde des comptes d'un client");
         System.out.println("7 - Voir les informations d'un client");
         System.out.println("8 - Voir l'historique des transactions");
+        System.out.println("9 - Creer un client");
     }
 
-    public Client createClient(String name) {
+   /* public Client createClient(String name) {
        return new Client (name);
-    }
+    } */
 
 }
