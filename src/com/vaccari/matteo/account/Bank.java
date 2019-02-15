@@ -69,6 +69,8 @@ public class Bank {
         System.out.println("7 - Voir les informations d'un client");
         System.out.println("8 - Voir l'historique des transactions");
         System.out.println("9 - Voir l'historique des dépots/retraits");
+        System.out.println("10 - Créer un client");
+        System.out.println("11 - Supprimer un client");
     }
 
    public void addClientToList(int clientID, Client client) {
@@ -94,8 +96,8 @@ public class Bank {
        }
 
     }
-   /* public Client createClient(String name) {
-       return new Client (name);
-    } */
+    public void createClient(String name) {
+       new Client (name);
+    }
 
 }
