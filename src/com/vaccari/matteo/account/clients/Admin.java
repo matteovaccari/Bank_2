@@ -6,7 +6,7 @@ public class Admin extends Client {
     private String passWord="123456";
 
    public Admin(String name) {
-        super (name);
+        this.name= name;
     }
 
     public String getUserName() {
