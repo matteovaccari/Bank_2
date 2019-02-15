@@ -6,4 +6,8 @@ public class InsufisiantBalanceForBankTransferException extends Exception {
         System.out.println("Virement impossible pour cause de solde insufissant.");
     }
 
+    public InsufisiantBalanceForBankTransferException(String message) {
+        super(message);
+    }
+
 }
