@@ -29,7 +29,7 @@ public class Bank {
                 }
 
                 if(amount < 0) {
-                    throw new NegativeAmountForTransfertException(); // Throw une exception si le montant est négatif
+                    throw new NegativeAmountForTransfertException("Negative amount not allowed for transfers"); // Throw une exception si le montant est négatif
                 }
 
         if (client1.currentAccount.balance >= amount) {
