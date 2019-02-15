@@ -35,6 +35,7 @@ public class Client {
         this.name = name;
         this.id = ++totalID;
         Bank.clientList.put(this.id , this);
+        this.currentAccount = new CurrentAccount(name);
     }
 
     //Méthodes
