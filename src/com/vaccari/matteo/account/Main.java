@@ -240,6 +240,21 @@ public class Main {
                               Thread.sleep(150);
                       }
                     break;
+                case 11:
+                    System.out.println("Interface de suppréssion de client");
+                    System.out.println("Choisir l'ID du client à supprimer :");
+
+                    Set<Map.Entry<Integer, Client>> setHm8 = Bank.clientList.entrySet();
+                    Iterator<Map.Entry<Integer, Client>> it8 = setHm8.iterator();
+                    while (it8.hasNext()) {
+                        Map.Entry<Integer, Client> e2 = it8.next();
+                        System.out.println(e2.getKey() + " : " + e2.getValue().name);
+                    }
+                    int nbRemove = sc.nextInt();
+                    Bank.clientList.remove(nbRemove);
+                    System.out.println("Client supprimé avec succès.");
+                    Thread.sleep(4500);
+                    break;
             }
         }
         System.out.println(" "); // avant retour du menu ligne blanche
