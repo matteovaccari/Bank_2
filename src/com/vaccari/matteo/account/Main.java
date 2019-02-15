@@ -6,25 +6,19 @@ import com.vaccari.matteo.account.clients.Admin;
 import com.vaccari.matteo.account.clients.Client;
 import com.vaccari.matteo.account.exceptions.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String... args) throws InterruptedException {
 
         Bank bank1 = new Bank("Bank1");  //Instanciation de la banque Bank1
 
-        List<String> clientList = new ArrayList<>(); // Liste des clients
         List<String> accountList = new ArrayList<>(); // Liste de comptes
 
         Client thierry = new Client("Thierry"); //Instanciation de clients
         Client matthieu = new Client("Matthieu");
 
         Admin guichetiere = new Admin("Guichetiere"); // Instanciation de la guichetière
-
-        clientList.add(thierry.name);    // Ajout des clients à la liste de clients
-        clientList.add(matthieu.name);
 
         thierry.bank = bank1;  //Affectation de la banque à l'attribut des clients
         matthieu.bank = bank1;
@@ -67,9 +61,14 @@ public class Main {
             switch (nbTodo) {
                 case 1:
                     System.out.println("Voici la liste des clients:");
-                    for (int i = 0; i < clientList.size(); i++) {
-                        System.out.println(clientList.get(i));
+
+                    Set<Map.Entry<Integer, String>> setHm = Client.clientList.entrySet();
+                    Iterator<Map.Entry<Integer, String>> it = setHm.iterator();
+                    while (it.hasNext()) {
+                        Map.Entry<Integer, String> e = it.next();
+                        System.out.println(e.getKey() + " : " + e.getValue());
                     }
+
                     Thread.sleep(4500);
                     break;
                 case 2:
@@ -81,63 +80,55 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Interface des versements, choisir client qui va recevoir le dépôt:");
-                    for (int i = 0; i < clientList.size(); i++) {
-                        System.out.println(clientList.get(i));
-                        String clientDeposit = sc.nextLine();
 
-                        if (clientDeposit.equalsIgnoreCase("thierry")) {
-                            System.out.println("Choisir la somme à virer sur le compte de Thierry: ");
-                            int amountDeposit = sc.nextInt();
-                            try {
-                                thierry.deposit(amountDeposit, thierryCurrentAccount);
-                            } catch (NegativeAmountForDepositException e) {
-                                e.printStackTrace();
-                                System.out.println(e.getMessage());
-                            }
-                        } else if (clientDeposit.equalsIgnoreCase("matthieu")) {
-                            System.out.println("Choisir la somme à virer sur le compte de Matthieu: ");
-                            int amountDeposit2 = sc.nextInt();
-                            try {
-                                matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
-                            } catch (NegativeAmountForDepositException e) {
-                                e.printStackTrace();
-                                System.out.println(e.getMessage());
-                            }
+                    Set<Map.Entry<Integer, String>> setHm2 = Client.clientList.entrySet();
+                    Iterator<Map.Entry<Integer, String>> it2 = setHm2.iterator();
+                    while (it2.hasNext()) {
+                        Map.Entry<Integer, String> e = it2.next();
+                        System.out.println(e.getKey() + " : " + e.getValue());
+                    }
+
+                    int clientDeposit = sc.nextInt();
+
+                    if (Client.clientList.containsKey(clientDeposit)) {
+                        System.out.println("Choisir la somme à virer sur le compte de " + Client.clientList.get(clientDeposit) + " :");
+                        int amountDeposit = sc.nextInt();
+
+                        try {
+                            .deposit(amountDeposit);
+                        } catch (NegativeAmountForDepositException e) {
+                            e.printStackTrace();
+                            System.out.println(e.getMessage());
                         }
+                    } else {
+                        System.out.println("Erreur de saisi ID client");
                     }
                     Thread.sleep(4500);
                     break;
 
                 case 4:
-                    System.out.println("Interface des retraits, choisir client qui va retirer son argent:");
-                    for (int i = 0; i < clientList.size(); i++) {
-                        System.out.println(clientList.get(i));
-                        String clientWithdrawal = sc.nextLine();
+                   System.out.println("Interface des retraits, choisir client qui va retirer son argent:");
 
-                        if (clientWithdrawal.equalsIgnoreCase("thierry")) {
-                            System.out.println("Choisir la somme à retirer sur le compte de Thierry: ");
+                    Set<Map.Entry<Integer, String>> setHm3 = Client.clientList.entrySet();
+                    Iterator<Map.Entry<Integer, String>> it3 = setHm3.iterator();
+                    while (it3.hasNext()) {
+                        Map.Entry<Integer, String> e = it3.next();
+                        System.out.println(e.getKey() + " : " + e.getValue());
+                    }
+                        int clientWithdrawal = sc.nextInt();
+
+                        if (Client.clientList.containsKey(clientWithdrawal)) {
+                            System.out.println("Choisir la somme à retirer sur le compte de " + Client.clientList.get(clientWithdrawal));
                             int amountWithDrawal = sc.nextInt();
                             try {                                                                                   //Catch de l'esception pour solde insu pour retrait
-                                thierry.withdrawal(amountWithDrawal, thierryCurrentAccount);
+                                .withdrawal(amountWithDrawal);
                             }
                             catch (InsufisiantBalanceForWithdrawalException | NegativeAmountForWithdrawalException e) {
                                 e.printStackTrace();
                                 System.out.println(e.getMessage());
                             }
 
-                        } else if (clientWithdrawal.equalsIgnoreCase("matthieu")) {
-                            System.out.println("Choisir la somme à retirer sur le compte de Matthieu: ");
-                            int amountWithDrawal = sc.nextInt();
-                            try {                                                                                   //Catch de l'esception pour solde insu pour retrait
-                                matthieu.withdrawal(amountWithDrawal, matthieuCurrentAccount);
-                            }
-                            catch (InsufisiantBalanceForWithdrawalException | NegativeAmountForWithdrawalException e){
-                                e.printStackTrace();
-                                System.out.println(e.getMessage());
-                            }
-
                         }
-                    }
                     Thread.sleep(4500);
                     break;
                 case 5:
@@ -222,12 +213,7 @@ public class Main {
                     Thread.sleep(4500);
                     break;
                 case 9:
-                    //System.out.println(bank1.createClient("Charles"));
 
-
-                    for (int i = 0; i < clientList.size();i++){
-                        System.out.println(clientList.get(i));
-                    }
 
             }
             System.out.println(" "); // avant retour du menu ligne blanche
