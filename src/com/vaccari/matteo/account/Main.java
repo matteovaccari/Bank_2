@@ -233,7 +233,7 @@ public class Main {
                               String clientName = sc.nextLine();
                               new Client (clientName);
                               System.out.println("Client crée.");
-
+                              accountList.add("Compte courant de " + clientName);
                               Thread.sleep(4000);
                               break;
                           case 2:
