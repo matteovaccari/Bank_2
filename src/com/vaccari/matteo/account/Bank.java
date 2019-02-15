@@ -1,11 +1,14 @@
 package com.vaccari.matteo.account;
 
+import com.vaccari.matteo.account.accounts.Account;
 import com.vaccari.matteo.account.clients.Client;
 import com.vaccari.matteo.account.exceptions.InsufisiantBalanceForBankTransferException;
 import com.vaccari.matteo.account.exceptions.NegativeAmountForTransfertException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Bank {
     // Attributs
@@ -13,6 +16,8 @@ public class Bank {
     int capital = 100000;
     public List<String> transferHistory = new ArrayList<>();
     public Client client;
+    public static Map<Integer, Client> clientList = new HashMap<>();
+    public static List<String> historyList = new ArrayList<>();
 
     // Constructeur
 
@@ -25,7 +30,7 @@ public class Bank {
    public void transfer (Client client1, Client client2, int amount) throws InsufisiantBalanceForBankTransferException, NegativeAmountForTransfertException {
 
                 if (client1.currentAccount.balance < amount) {
-                    throw new InsufisiantBalanceForBankTransferException("insufisiant balance not allowed for this amount.");   // Créer une exception si le solde du client émétteur est insufissant
+                    throw new InsufisiantBalanceForBankTransferException("insufisiant balance not allowed for transfers.");   // Créer une exception si le solde du client émétteur est insufissant
                 }
 
                 if(amount < 0) {
@@ -44,7 +49,7 @@ public class Bank {
     }
 
    public void showTransferHistory () {
-        if (transferHistory.size() != 0) {
+        if (!transferHistory.isEmpty()) {
             System.out.println("Voici la liste des transfers qui ont eut lieu dans " + this.name);
             for (int i = 0; i < transferHistory.size(); i++) {
                 System.out.println(transferHistory.get(i));
@@ -63,9 +68,32 @@ public class Bank {
         System.out.println("6 - Voir le solde des comptes d'un client");
         System.out.println("7 - Voir les informations d'un client");
         System.out.println("8 - Voir l'historique des transactions");
-        System.out.println("9 - Creer un client");
+        System.out.println("9 - Voir l'historique des dépots/retraits");
     }
 
+   public void addClientToList(int clientID, Client client) {
+       clientList.put(clientID, client);
+   }
+
+   public static void addDepositToHistoryList (int howMuch, Client client) {
+       historyList.add("Dépot de " + howMuch + "€ sur le compte courant de " +  client.name +".");
+   }
+
+   public static void addWithDrawalToHistoryList (int howMuch, Client client) {
+       historyList.add ("Retrait de " + howMuch + "€ sur le compte courant " +  client.name +".");
+   }
+
+    public void showHistory() {
+       if(historyList.isEmpty()) {
+           System.out.println("Aucun dépot/retrait réalisé.");
+       } else {
+           System.out.println("Voici l'historique des dépots/retraits :");
+           for (int i = 0; i < historyList.size(); i++) {
+               System.out.println(historyList.get(i));
+           }
+       }
+
+    }
    /* public Client createClient(String name) {
        return new Client (name);
     } */
