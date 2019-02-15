@@ -91,6 +91,8 @@ public class Main {
                             try {
                                 thierry.deposit(amountDeposit, thierryCurrentAccount);
                             } catch (NegativeAmountForDepositException e) {
+                                e.printStackTrace();
+                                System.out.println(e.getMessage());
                             }
                         } else if (clientDeposit.equalsIgnoreCase("matthieu")) {
                             System.out.println("Choisir la somme à virer sur le compte de Matthieu: ");
@@ -98,6 +100,8 @@ public class Main {
                             try {
                                 matthieu.deposit(amountDeposit2, matthieuCurrentAccount);
                             } catch (NegativeAmountForDepositException e) {
+                                e.printStackTrace();
+                                System.out.println(e.getMessage());
                             }
                         }
                     }
@@ -117,7 +121,8 @@ public class Main {
                                 thierry.withdrawal(amountWithDrawal, thierryCurrentAccount);
                             }
                             catch (InsufisiantBalanceForWithdrawalException | NegativeAmountForWithdrawalException e) {
-
+                                e.printStackTrace();
+                                System.out.println(e.getMessage());
                             }
 
                         } else if (clientWithdrawal.equalsIgnoreCase("matthieu")) {
@@ -127,7 +132,8 @@ public class Main {
                                 matthieu.withdrawal(amountWithDrawal, matthieuCurrentAccount);
                             }
                             catch (InsufisiantBalanceForWithdrawalException | NegativeAmountForWithdrawalException e){
-
+                                e.printStackTrace();
+                                System.out.println(e.getMessage());
                             }
 
                         }
@@ -174,7 +180,8 @@ public class Main {
                             bank1.transfer(thierry,matthieu,amount);
                         }
                         catch (NegativeAmountForTransfertException | InsufisiantBalanceForBankTransferException e) {
-
+                            e.printStackTrace();
+                            System.out.println(e.getMessage());
                         }
                     }
                     else {
