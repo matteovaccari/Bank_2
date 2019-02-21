@@ -114,48 +114,69 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.println("Interface des retraits, choisir client qui va retirer son argent:");
+                    System.out.println("Interface des retraits");
+                    System.out.println("1 - Effectuer un retrait");
+                    System.out.println("2 - Retour");
 
-                    Set<Map.Entry<Integer, Client>> setHm3 = Bank.clientList.entrySet();
-                    Iterator<Map.Entry<Integer, Client>> it3 = setHm3.iterator();
-                    while (it3.hasNext()) {
-                        Map.Entry<Integer, Client> e = it3.next();
-                        System.out.println(e.getKey() + " : " + e.getValue().name);
+                    int nb6 = sc.nextInt();
+
+                    switch (nb6) {
+                        case 1:
+                            System.out.println("Interface des retraits, choisir client qui va retirer son argent:");
+
+                            Set<Map.Entry<Integer, Client>> setHm3 = Bank.clientList.entrySet();
+                            Iterator<Map.Entry<Integer, Client>> it3 = setHm3.iterator();
+                            while (it3.hasNext()) {
+                                Map.Entry<Integer, Client> e = it3.next();
+                                System.out.println(e.getKey() + " : " + e.getValue().name);
+                            }
+                            int clientWithdrawal = sc.nextInt();
+
+                            if (Bank.clientList.containsKey(clientWithdrawal)) {
+                                System.out.println("Choisir la somme à retirer sur le compte de " + Bank.clientList.get(clientWithdrawal).name);
+                                int amountWithDrawal = sc.nextInt();
+                                try {                                                                                   //Catch de l'esception pour solde insu pour retrait
+                                    Bank.clientList.get(clientWithdrawal).withdrawal(amountWithDrawal, Bank.clientList.get(clientWithdrawal));
+                                } catch (InsufisiantBalanceForWithdrawalException | NegativeAmountForWithdrawalException e) {
+                                    e.printStackTrace();
+                                    System.out.println(e.getMessage());
+                                }
+
+                            }
+                            Thread.sleep(4500);
+                            break;
+                        case 2:
+                            Thread.sleep(150);
                     }
-                    int clientWithdrawal = sc.nextInt();
-
-                    if (Bank.clientList.containsKey(clientWithdrawal)) {
-                        System.out.println("Choisir la somme à retirer sur le compte de " + Bank.clientList.get(clientWithdrawal).name);
-                        int amountWithDrawal = sc.nextInt();
-                        try {                                                                                   //Catch de l'esception pour solde insu pour retrait
-                            Bank.clientList.get(clientWithdrawal).withdrawal(amountWithDrawal, Bank.clientList.get(clientWithdrawal));
-                        } catch (InsufisiantBalanceForWithdrawalException | NegativeAmountForWithdrawalException e) {
-                            e.printStackTrace();
-                            System.out.println(e.getMessage());
-                        }
-
-                    }
-                    Thread.sleep(4500);
                     break;
+
                 case 5:
-                    System.out.println("Interface des virements, choisir client émmetteur");
+                    System.out.println("Interface des virements");
+                    System.out.println("1 - Effectuer un virement");
+                    System.out.println("2 - Retour");
 
-                    Set<Map.Entry<Integer, Client>> setHm4 = Bank.clientList.entrySet();
-                    Iterator<Map.Entry<Integer, Client>> it4 = setHm4.iterator();
-                    while (it4.hasNext()) {
-                        Map.Entry<Integer, Client> e = it4.next();
-                        System.out.println(e.getKey() + " : " + e.getValue().name);
-                    }
-                        int client1 = sc.nextInt();
+                    int nb5 = sc.nextInt();
 
-                        System.out.println("Choisir client recepteur");
+                    switch(nb5) {
+                        case 1:
+                            System.out.println("Interface des virements, choisir client émmetteur");
 
-                        Set<Map.Entry<Integer, Client>> setHm5 = Bank.clientList.entrySet();
-                        Iterator<Map.Entry<Integer, Client>> it5 = setHm4.iterator();
-                        while (it5.hasNext()) {
-                            Map.Entry<Integer, Client> e2 = it5.next();
-                            System.out.println(e2.getKey() + " : " + e2.getValue().name);
-                        }
+                            Set<Map.Entry<Integer, Client>> setHm4 = Bank.clientList.entrySet();
+                            Iterator<Map.Entry<Integer, Client>> it4 = setHm4.iterator();
+                            while (it4.hasNext()) {
+                                Map.Entry<Integer, Client> e = it4.next();
+                                System.out.println(e.getKey() + " : " + e.getValue().name);
+                            }
+                            int client1 = sc.nextInt();
+
+                            System.out.println("Choisir client recepteur");
+
+                            Set<Map.Entry<Integer, Client>> setHm5 = Bank.clientList.entrySet();
+                            Iterator<Map.Entry<Integer, Client>> it5 = setHm4.iterator();
+                            while (it5.hasNext()) {
+                                Map.Entry<Integer, Client> e2 = it5.next();
+                                System.out.println(e2.getKey() + " : " + e2.getValue().name);
+                            }
                             int client2 = sc.nextInt();
 
                             System.out.println("Choisir montant du transfer");
@@ -163,7 +184,7 @@ public class Main {
 
                             if (Bank.clientList.containsKey(client1) && Bank.clientList.containsKey(client2)) {
                                 try {
-                      bank1.transfer(Bank.clientList.get(client1), Bank.clientList.get(client2), amount);
+                                    bank1.transfer(Bank.clientList.get(client1), Bank.clientList.get(client2), amount);
                                 } catch (InsufisiantBalanceForBankTransferException | NegativeAmountForTransfertException e3) {
                                     e3.printStackTrace();
                                     System.out.println(e3.getMessage());
@@ -173,6 +194,10 @@ public class Main {
                             }
                             Thread.sleep(4500);
                             break;
+                        case 2:
+                            Thread.sleep(150);
+                    }
+                    break;
 
                 case 6:
                     System.out.println("Interface de consultation des soldes:");
