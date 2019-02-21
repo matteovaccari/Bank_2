@@ -86,31 +86,43 @@ public class Main {
                     Thread.sleep(4500);
                     break;
                 case 3:
-                    System.out.println("Interface des versements, choisir client qui va recevoir le dépôt:");
+                    System.out.println("Interface des dépots");
+                    System.out.println("1 - Effectuer un dépot");
+                    System.out.println("2 - Retour");
 
-                    Set<Map.Entry<Integer, Client>> setHm2 = Bank.clientList.entrySet();
-                    Iterator<Map.Entry<Integer, Client>> it2 = setHm2.iterator();
-                    while (it2.hasNext()) {
-                        Map.Entry<Integer, Client> e = it2.next();
-                        System.out.println(e.getKey() + " : " + e.getValue().name);
+                    int nb7 = sc.nextInt();
+
+                    switch (nb7) {
+                        case 1:
+                            System.out.println("Interface des versements, choisir client qui va recevoir le dépôt:");
+
+                            Set<Map.Entry<Integer, Client>> setHm2 = Bank.clientList.entrySet();
+                            Iterator<Map.Entry<Integer, Client>> it2 = setHm2.iterator();
+                            while (it2.hasNext()) {
+                                Map.Entry<Integer, Client> e = it2.next();
+                                System.out.println(e.getKey() + " : " + e.getValue().name);
+                            }
+
+                            int clientDeposit = sc.nextInt();
+
+                            if (Bank.clientList.containsKey(clientDeposit)) {
+                                System.out.println("Choisir la somme à virer sur le compte de " + Bank.clientList.get(clientDeposit).name + " :");
+                                int amountDeposit = sc.nextInt();
+
+                                try {
+                                    Bank.clientList.get(clientDeposit).deposit(amountDeposit,Bank.clientList.get(clientDeposit));
+                                } catch (NegativeAmountForDepositException e) {
+                                    e.printStackTrace();
+                                    System.out.println(e.getMessage());
+                                }
+                            } else {
+                                System.out.println("Erreur de saisi ID client");
+                            }
+                            Thread.sleep(4500);
+                            break;
+                        case 2:
+                            Thread.sleep(150);
                     }
-
-                    int clientDeposit = sc.nextInt();
-
-                    if (Bank.clientList.containsKey(clientDeposit)) {
-                        System.out.println("Choisir la somme à virer sur le compte de " + Bank.clientList.get(clientDeposit).name + " :");
-                        int amountDeposit = sc.nextInt();
-
-                        try {
-                            Bank.clientList.get(clientDeposit).deposit(amountDeposit,Bank.clientList.get(clientDeposit));
-                        } catch (NegativeAmountForDepositException e) {
-                            e.printStackTrace();
-                            System.out.println(e.getMessage());
-                        }
-                    } else {
-                        System.out.println("Erreur de saisi ID client");
-                    }
-                    Thread.sleep(4500);
                     break;
 
                 case 4:
