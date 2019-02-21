@@ -58,6 +58,8 @@ public class Bank {
             System.out.println("Aucune transaction réalisée");
         }
     }
+
+
    public void showBankMenu() {
         System.out.println("Que voulez vous faire ?:");
         System.out.println("1 - Voir la liste des clients");
@@ -73,8 +75,8 @@ public class Bank {
         System.out.println("11 - Supprimer un client");
     }
 
-   public void addClientToList(int clientID, Client client) {
-       clientList.put(clientID, client);
+   public void addClientToList(int id, Client client) {
+       clientList.put(Client.totalID, client);
    }
 
    public static void addDepositToHistoryList (int howMuch, Client client) {
