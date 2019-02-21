@@ -6,7 +6,13 @@ import com.vaccari.matteo.account.clients.Admin;
 import com.vaccari.matteo.account.clients.Client;
 import com.vaccari.matteo.account.exceptions.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
 
 public class Main {
     public static void main(String... args) throws InterruptedException {
@@ -41,7 +47,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);   // Instanciation du scanner
 
 
-/**
+
  System.out.println("Admin.");
  System.out.println("Mot de passe ?");
  String inputPassword = sc.nextLine();   // Connection
@@ -50,7 +56,7 @@ public class Main {
  inputPassword = sc.nextLine();
  }
  System.out.println("Mot de passe correct, accés à l'application autorisé.");  //Si mot de passe entré .equals le mot de passe, accés autorisé
- */
+
 
         int nbInfinity = 1;
 
@@ -242,19 +248,29 @@ public class Main {
                     break;
                 case 11:
                     System.out.println("Interface de suppréssion de client");
-                    System.out.println("Choisir l'ID du client à supprimer :");
+                    System.out.println("1 - Supprimer un client");
+                    System.out.println("2 - Retour");
 
-                    Set<Map.Entry<Integer, Client>> setHm8 = Bank.clientList.entrySet();
-                    Iterator<Map.Entry<Integer, Client>> it8 = setHm8.iterator();
-                    while (it8.hasNext()) {
-                        Map.Entry<Integer, Client> e2 = it8.next();
-                        System.out.println(e2.getKey() + " : " + e2.getValue().name);
+                    int nb2 = sc.nextInt();
+
+                    switch (nb2) {
+                        case 1:
+                            System.out.println("Choisir l'ID du client à supprimer :");
+                            Set<Map.Entry<Integer, Client>> setHm8 = Bank.clientList.entrySet();
+                            Iterator<Map.Entry<Integer, Client>> it8 = setHm8.iterator();
+                            while (it8.hasNext()) {
+                                Map.Entry<Integer, Client> e2 = it8.next();
+                                System.out.println(e2.getKey() + " : " + e2.getValue().name);
+                            }
+                            int nbRemove = sc.nextInt();
+                            Bank.clientList.remove(nbRemove);
+                            System.out.println("Client supprimé avec succès.");
+                            Thread.sleep(4500);
+                            break;
+                        case 2:
+                            Thread.sleep(150);
+                            break;
                     }
-                    int nbRemove = sc.nextInt();
-                    Bank.clientList.remove(nbRemove);
-                    System.out.println("Client supprimé avec succès.");
-                    Thread.sleep(4500);
-                    break;
             }
         }
         System.out.println(" "); // avant retour du menu ligne blanche
