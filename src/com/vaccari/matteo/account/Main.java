@@ -175,48 +175,69 @@ public class Main {
                             break;
 
                 case 6:
+                    System.out.println("Interface de consultation des soldes:");
+                    System.out.println("1 - Consulter un solde");
+                    System.out.println("2 - Retour");
 
-                    System.out.println("Choisir client à consulter le(s) solde(s)");
+                    int nb4 = sc.nextInt();
 
-                    Set<Map.Entry<Integer, Client>> setHm6 = Bank.clientList.entrySet();
-                    Iterator<Map.Entry<Integer, Client>> it6 = setHm6.iterator();
-                    while (it6.hasNext()) {
-                        Map.Entry<Integer, Client> e2 = it6.next();
-                        System.out.println(e2.getKey() + " : " + e2.getValue().name);
+                    switch (nb4) {
+                        case 1:
+                            System.out.println("Choisir client à consulter le(s) solde(s)");
+
+                            Set<Map.Entry<Integer, Client>> setHm6 = Bank.clientList.entrySet();
+                            Iterator<Map.Entry<Integer, Client>> it6 = setHm6.iterator();
+                            while (it6.hasNext()) {
+                                Map.Entry<Integer, Client> e2 = it6.next();
+                                System.out.println(e2.getKey() + " : " + e2.getValue().name);
+                            }
+
+                            int client = sc.nextInt();
+                            if (Bank.clientList.containsKey(client)) {
+                                Bank.clientList.get(client).showBalance();
+                            } else {
+                                System.out.println("Erreur de saisie");
+                            }
+
+                            Thread.sleep(4500);
+                            break;
+                        case 2:
+                            Thread.sleep(150);
                     }
-
-                    int client = sc.nextInt();
-                    if (Bank.clientList.containsKey(client)) {
-                        Bank.clientList.get(client).showBalance();
-                    } else {
-                        System.out.println("Erreur de saisie");
-                    }
-
-                    Thread.sleep(4500);
                     break;
 
                 case 7:
+                    System.out.println("Interface de consultation de page Client:");
+                    System.out.println("1 - Consulter les informations d'un client");
+                    System.out.println("2 - Retour");
 
-                    System.out.println("Choisir client à consulter les informations :");
+                    int nb3 = sc.nextInt();
 
-                    Set<Map.Entry<Integer, Client>> setHm7 = Bank.clientList.entrySet();
-                    Iterator<Map.Entry<Integer, Client>> it7 = setHm7.iterator();
-                    while (it7.hasNext()) {
-                        Map.Entry<Integer, Client> e2 = it7.next();
-                        System.out.println(e2.getKey() + " : " + e2.getValue().name);
+                    switch(nb3) {
+                        case 1:
+                            System.out.println("Choisir client à consulter les informations :");
+
+                            Set<Map.Entry<Integer, Client>> setHm7 = Bank.clientList.entrySet();
+                            Iterator<Map.Entry<Integer, Client>> it7 = setHm7.iterator();
+                            while (it7.hasNext()) {
+                                Map.Entry<Integer, Client> e2 = it7.next();
+                                System.out.println(e2.getKey() + " : " + e2.getValue().name);
+                            }
+
+                            int clientInfo = sc.nextInt();
+
+                            if(Bank.clientList.containsKey(clientInfo)) {
+                                Bank.clientList.get(clientInfo).showInfo();
+                            } else {
+                                System.out.println("Erreur de saisie");
+                            }
+
+                            Thread.sleep(4500);
+                            break;
+                        case 2:
+                            Thread.sleep(150);
                     }
-
-                    int clientInfo = sc.nextInt();
-
-                    if(Bank.clientList.containsKey(clientInfo)) {
-                        Bank.clientList.get(clientInfo).showInfo();
-                    } else {
-                        System.out.println("Erreur de saisie");
-                    }
-
-                    Thread.sleep(4500);
                     break;
-
                 case 8:
                     bank1.showTransferHistory();
                     Thread.sleep(4500);
@@ -276,6 +297,5 @@ public class Main {
         System.out.println(" "); // avant retour du menu ligne blanche
     }
 }
-
 
 
