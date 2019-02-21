@@ -21,32 +21,9 @@ public class Main {
 
         List<String> accountList = new ArrayList<>(); // Liste de comptes
 
-
-        Client thierry = new Client("Thierry"); //Instanciation de clients
-        Client matthieu = new Client("Matthieu");
-
         Admin guichetiere = new Admin("Guichetiere"); // Instanciation de la guichetière
 
-        thierry.bank = bank1;  //Affectation de la banque à l'attribut des clients
-        matthieu.bank = bank1;
-
-        bank1.client = matthieu; // Affection de matthieu comme client // test(X)
-
-        CurrentAccount thierryCurrentAccount = new CurrentAccount("Thierry");   //Creation du compte courant des clients
-        CurrentAccount matthieuCurrentAccount = new CurrentAccount("Matthieu");
-        SavingAccount matthieuSavingAccount = new SavingAccount("Matthieu");  // Création du compte épargne de Matthieu
-
-        thierry.currentAccount = thierryCurrentAccount;   //Affectation des comptes courants
-        matthieu.currentAccount = matthieuCurrentAccount;
-        matthieu.savingAccount = matthieuSavingAccount;    // Affectation du compte épargne
-
-        accountList.add(thierryCurrentAccount.name);  // Ajout des comptes à la liste de comptes
-        accountList.add(matthieuCurrentAccount.name);
-        accountList.add(matthieuSavingAccount.name);
-
         Scanner sc = new Scanner(System.in);   // Instanciation du scanner
-
-
 
  System.out.println("Admin.");
  System.out.println("Mot de passe ?");
@@ -67,23 +44,34 @@ public class Main {
 
             switch (nbTodo) {
                 case 1:
-                    System.out.println("Voici la liste des clients:");
 
-                    Set<Map.Entry<Integer, Client>> setHm = Bank.clientList.entrySet();
-                    Iterator<Map.Entry<Integer, Client>> it = setHm.iterator();
-                    while (it.hasNext()) {
-                        Map.Entry<Integer, Client> e = it.next();
-                        System.out.println(e.getKey() + " : " + e.getValue().name);
+                    if (!Bank.clientList.isEmpty()) {
+                        System.out.println("Voici la liste des clients:");
+
+                        Set<Map.Entry<Integer, Client>> setHm = Bank.clientList.entrySet();
+                        Iterator<Map.Entry<Integer, Client>> it = setHm.iterator();
+                        while (it.hasNext()) {
+                            Map.Entry<Integer, Client> e = it.next();
+                            System.out.println(e.getKey() + " : " + e.getValue().name);
+                        }
+
+                        Thread.sleep(4500);
+                    } else {
+                        System.out.println("Aucun client enregistré.");
+                        Thread.sleep(4000);
                     }
-
-                    Thread.sleep(4500);
-                 break;
+                    break;
                 case 2:
-                    System.out.println("Voici la liste des comptes");
-                    for (int i = 0; i < accountList.size(); i++) {
-                        System.out.println(accountList.get(i));
+                    if (!accountList.isEmpty()) {
+                        System.out.println("Voici la liste des comptes");
+                        for (int i = 0; i < accountList.size(); i++) {
+                            System.out.println(accountList.get(i));
+                        }
+                        Thread.sleep(4500);
+                    } else {
+                        System.out.println("Aucun compte enregistré.");
+                        Thread.sleep(4000);
                     }
-                    Thread.sleep(4500);
                     break;
                 case 3:
                     System.out.println("Interface des dépots");
@@ -220,23 +208,27 @@ public class Main {
 
                     switch (nb4) {
                         case 1:
-                            System.out.println("Choisir client à consulter le(s) solde(s)");
+                            if (!Bank.clientList.isEmpty()) {
+                                System.out.println("Choisir client à consulter le(s) solde(s)");
+                                Set<Map.Entry<Integer, Client>> setHm6 = Bank.clientList.entrySet();
+                                Iterator<Map.Entry<Integer, Client>> it6 = setHm6.iterator();
+                                while (it6.hasNext()) {
+                                    Map.Entry<Integer, Client> e2 = it6.next();
+                                    System.out.println(e2.getKey() + " : " + e2.getValue().name);
+                                }
 
-                            Set<Map.Entry<Integer, Client>> setHm6 = Bank.clientList.entrySet();
-                            Iterator<Map.Entry<Integer, Client>> it6 = setHm6.iterator();
-                            while (it6.hasNext()) {
-                                Map.Entry<Integer, Client> e2 = it6.next();
-                                System.out.println(e2.getKey() + " : " + e2.getValue().name);
-                            }
+                                int client = sc.nextInt();
+                                if (Bank.clientList.containsKey(client)) {
+                                    Bank.clientList.get(client).showBalance();
+                                } else {
+                                    System.out.println("Erreur de saisie");
+                                }
 
-                            int client = sc.nextInt();
-                            if (Bank.clientList.containsKey(client)) {
-                                Bank.clientList.get(client).showBalance();
+                                Thread.sleep(4500);
                             } else {
-                                System.out.println("Erreur de saisie");
+                                System.out.println("Consultation impossible, aucun client enregistré.");
+                                Thread.sleep(4000);
                             }
-
-                            Thread.sleep(4500);
                             break;
                         case 2:
                             Thread.sleep(150);
@@ -295,7 +287,7 @@ public class Main {
                               System.out.println("Entrez le nom du client:");
                               sc.nextLine();
                               String clientName = sc.nextLine();
-                              new Client (clientName);
+                              bank1.addClientToList(Client.totalID, new Client(clientName));
                               System.out.println("Client crée.");
                               accountList.add("Compte courant de " + clientName);
                               Thread.sleep(4000);
